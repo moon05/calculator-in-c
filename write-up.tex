@@ -1,6 +1,10 @@
 \documentclass[12pt]{article}
 \usepackage{times}
+\usepackage{amssymb}
+\usepackage{mathtools}
 \usepackage[T1]{fontenc}
+
+\let\emptyset\varnothing
 
 \title{\bf{Description of Calculator Project in C}}
 \author{Abdullah Al Mamun}
@@ -12,53 +16,58 @@
 \large{
 
 My program can calculate the results of many expressions. It consists of a Scanner, Parser and some other necessary functions.
-
-
+\\
+\\
+\textbf{Scanner}
+I have a Function that takes in the read String, and tokenizes it based on spaces and puts everything in a linked list. The Strings are differentiated based on semicolons right in the beginning when the file is being read. Later this linked list of tokens are passed on to the parser.
+\\
+\\
 \textbf{Parser}
-My Parser analyzes the the tokenized values from the scanner.\\
-My CFG:\\
+My Parser analyzes the the token values from the scanner and returns the result of the expression.\\
 \\
-$Program \rightarrow Statement_List$\\
-$Statement_List \rightarrow Statement | \epsilon\\$
-$Statement \rightarrow id: Expression | read id | write expr\\$
-$Expression \rightarrow Term Term_tail$
-$Term_tail \rightarrow + Term Term_tail | \epsilon\\$
-$Term_tail \rightarrow - Term Term_tail| \epsilon\\$
-$Factor_tail \rightarrow * Factor Factor_tail | \epsilon\\$
-$Factor_tail \rightarrow / Factor Factor_tail | \epsilon\\$
-$Factor_tail \rightarrow \% Factor Factor_tail | \epsilon\\$
-$Factor \rightarrow ( Expression ) | id | number$\\
-
-
-\textbf{First}\\
-Program(id,read,write,$$)\\
-Statement_List(id,read,write)\\
-Statement(id,read,write)\\
-expr((,id,write)\\
-term_tail(+,-)\\
-term((,id,number)\\
-factor_tail(*,/,\%)\\
-factor((,id,number)\\
+\textbf{My CFG:}\\
 \\
-\textbf{Follow}
+$Program \rightarrow StatementList $ \\
+$StatementList \rightarrow Statement | \epsilon $ \\
+$Statement \rightarrow id: Expression | read id | write expr $ \\
+$Expression \rightarrow Term TermTail $ \\
+$TermTail \rightarrow + Term TermTail | \epsilon $ \\
+$TermTail \rightarrow - Term TermTail| \epsilon $ \\
+$FactorTail \rightarrow * Factor FactorTail | \epsilon $ \\
+$FactorTail \rightarrow / Factor FactorTail | \epsilon $ \\
+$FactorTail \rightarrow \% Factor FactorTail | \epsilon $ \\
+$Factor \rightarrow ( Expression ) | id | number $\\
 \\
-id \textbf{{}+, -, *, /, ), :=, id, read, write, $$\textbf{}}\\
-number \textbf{}}+, -, *, /, ), id, read, write, $$\textbf{}}\\
-read \textbf{}}id\textbf{}}\\
-write \textbf{}}(, id, number\textbf{}}
-( {(, id, number}
-) {+, -, *, /, ), id, read, write, $$} := {(, id, number}
-+ {(, id, number}
-- {(, id, number}
-* {(, id, number}
-/ {(, id, number}
-$$ ∅
-program ∅
-Statement_List {$$}
-stmt {id, read, write, $$}
+\\
+\textbf{First Sets}\\
+Program [ id, read, write, \$\$ ] \\
+StatementList [ id, read, write ] \\
+Statement [ id, read, write ] \\
+Expression [ (, id, number ] \\
+TermTail [ +, - ] \\
+Term [(, id, number] \\
+FactorTail [ *, /, \% ] \\
+Factor [ (, id, number ] \\ 
+\\
+\\
+\textbf{Follow Sets}\\
+id [ +, -, *, /, \%, ), :=, read, write, \$\$ ] \\
+number [ +, -, *, /, \%, ), id, read, write, \$\$ ] \\
+read [ id ] \\
+write [ (, id, number ] \\
+(  [ (, id, number ] \\
+)  [ +, -, *, /, \%, id, read, write, \$\$] \\
+:= [ (, id, number ] \\
++ [ (, id, number ] \\
+- [ (, id, number ] \\
+* [ (, id, number ] \\
+/ [ (, id, number ] \\
+\% [ (, id, number ] \\
+\$\$ $\emptyset$ \\
+program $\emptyset$ \\
+StatementList [ \$\$ ] \\
+Statement [ id, read, write, \$\$ ] \\
 
 
 
-
-}
 \end{document}
