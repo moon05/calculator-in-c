@@ -26,7 +26,7 @@ This file contains all the expressions calculated in the following format:
 <expression> = <result>
 
 
-Abilties
+Abilities
 --------------------
 My calculator takes care of all all the basic arithmetic operations. It can do +,-,*,/,%,().
 
